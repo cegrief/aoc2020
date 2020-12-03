@@ -15,6 +15,7 @@ namespace aoc2020Tests
 		{
 			std::vector<string> input = { "1721", "979", "366", "299", "675", "1456" };
 			Assert::AreEqual(514579, day1::run(input, false));
+			Assert::AreEqual(241861950, day1::run(input, true));
 		}
 	};
 }
