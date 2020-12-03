@@ -10,6 +10,7 @@
 
 #include "day1.h";
 #include "day2.h";
+#include "day3.h";
 
 
 using std::string;
@@ -30,16 +31,17 @@ vector<string> getInput(int day)
     return output;
 }
 
-int executeFunction(int day, bool partB, vector<string> input) 
+long long executeFunction(int day, bool partB, vector<string> input) 
 {
-    typedef int (*FnPtr)(vector<string>, bool);
+    typedef long long (*FnPtr)(vector<string>, bool);
     std::map<int, FnPtr> fnMap;
 
     fnMap[1] = day1::run;
     fnMap[2] = day2::run;
+    fnMap[3] = day3::run;
 
     auto start = std::chrono::high_resolution_clock::now();
-    int result = fnMap[day](input, partB);
+    long long result = fnMap[day](input, partB);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     std::cout << "Completed in " << duration.count() << "μs" << std::endl;
@@ -67,6 +69,6 @@ int main(int argc, char* argv[])
 
     vector<string> inp = getInput(day);
 
-    int result = executeFunction(day, partB, inp);
+    long long result = executeFunction(day, partB, inp);
     std::cout << "Result: " << result << std::endl;
 }

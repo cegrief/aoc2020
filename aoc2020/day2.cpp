@@ -1,7 +1,7 @@
 #include "day2.h"
-#include <algorithm>>""
+#include <algorithm>
 
-int day2::run(vector<string> input, bool isPartB) {
+long long day2::run(vector<string> input, bool isPartB) {
 
 	if (isPartB) {
 		return partB(input);

@@ -5,10 +5,10 @@
 using std::vector;
 using std::string;
 
-class day2
+class day3
 {
 public:
 	static long long run(vector<string> input, bool partB);
-	static int partA(vector<string> input);
-	static int partB(vector<string> input);
+	static long long partA(vector<string> input);
+	static long long partB(vector<string> input);
 };

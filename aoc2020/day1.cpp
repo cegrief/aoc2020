@@ -3,7 +3,7 @@
 #include <algorithm>
 
 
-int day1::run(vector<string> input, bool isPartB) {
+long long day1::run(vector<string> input, bool isPartB) {
 
 	std::vector<int> input_int;
 	std::transform(input.begin(), input.end(), std::back_inserter(input_int), [](const string& str) { return std::stoi(str); });
