@@ -9,6 +9,7 @@
 #include <sstream>
 
 #include "day1.h";
+#include "day2.h";
 
 
 using std::string;
@@ -35,6 +36,7 @@ int executeFunction(int day, bool partB, vector<string> input)
     std::map<int, FnPtr> fnMap;
 
     fnMap[1] = day1::run;
+    fnMap[2] = day2::run;
 
     auto start = std::chrono::high_resolution_clock::now();
     int result = fnMap[day](input, partB);

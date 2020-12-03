@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="aoc2020.cpp" />
     <ClCompile Include="day1.cpp" />
+    <ClCompile Include="day2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -152,5 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="day1.h" />
+    <ClInclude Include="day2.h" />
   </ItemGroup>
 </Project>
