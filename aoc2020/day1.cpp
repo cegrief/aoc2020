@@ -38,14 +38,12 @@ int day1::partB(vector<int> input) {
 	bool numMap[2020]{};
 
 	for (int i = 0; i < input.size(); i++) {
-		int val_i = input[i];
 		for (int j = i + 1; j < input.size(); j++) {
-			int val_j = input[j];
-			if ((2020-val_i-val_j > 0) && (numMap[2020 - val_i - val_j])) {
-				return val_i * val_j * (2020 - val_i - val_j);
+			if ((2020- input[i] - input[j] > 0) && (numMap[2020 - input[i] - input[j]])) {
+				return input[i] * input[j] * (2020 - input[i] - input[j]);
 			}
 		}
-		numMap[val_i] = true;
+		numMap[input[i]] = true;
 	}
 
 	return -1;
