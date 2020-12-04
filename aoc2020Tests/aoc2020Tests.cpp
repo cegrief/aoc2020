@@ -6,6 +6,8 @@
 #include "../aoc2020/day2.cpp"
 #include "../aoc2020/day3.h"
 #include "../aoc2020/day3.cpp"
+#include "../aoc2020/day4.h"
+#include "../aoc2020/day4.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -34,6 +36,24 @@ namespace aoc2020Tests
 			std::vector<string> input = { "..##.......", "#...#...#..", ".#....#..#.", "..#.#...#.#", ".#...##..#.", "..#.##.....", ".#.#.#....#", ".#........#", "#.##...#...", "#...##....#", ".#..#...#.#" };
 			Assert::AreEqual(7ll, day3::run(input, false));
 			Assert::AreEqual(336ll, day3::run(input, true));
+		}
+
+		TEST_METHOD(Day4Test)
+		{
+			std::vector<string> input = { "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd", "byr:1937 iyr:2017 cid:147 hgt:183cm", "", "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884", "hcl:#cfa07d byr:1929", " ", "hcl:#ae17e1 iyr:2013", "eyr:2024", "ecl:brn pid:760753108 byr:1931", "hgt:179cm", "    ", "hcl:#cfa07d eyr:2025 pid:166559648", "iyr:2011 ecl:brn hgt:59in" };
+			Assert::AreEqual(2ll, day4::run(input, false));
+
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1919 hcl:#623a2f", vector<string>{})); //invalid byr
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2021 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid iyr
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:20400 byr:1980 hcl:#623a2f", vector<string>{})); //invalid eyr
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:740in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid hgt
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74 ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid hgt
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2q", vector<string>{})); //invalid hcl
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:623a2f", vector<string>{})); //invalid hcl
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:pur iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid ecl
+			Assert::AreEqual(false, day4::isValidB("pid:08749970004 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid pid
+			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980", vector<string>{})); //missing entry
+			Assert::AreEqual(true, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{}));
 		}
 	};
 }
