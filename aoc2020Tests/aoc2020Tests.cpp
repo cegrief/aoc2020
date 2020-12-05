@@ -8,6 +8,8 @@
 #include "../aoc2020/day3.cpp"
 #include "../aoc2020/day4.h"
 #include "../aoc2020/day4.cpp"
+#include "../aoc2020/day5.h"
+#include "../aoc2020/day5.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -54,6 +56,15 @@ namespace aoc2020Tests
 			Assert::AreEqual(false, day4::isValidB("pid:08749970004 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{})); //invalid pid
 			Assert::AreEqual(false, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980", vector<string>{})); //missing entry
 			Assert::AreEqual(true, day4::isValidB("pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980 hcl:#623a2f", vector<string>{}));
+		}
+
+
+		TEST_METHOD(Day5Test)
+		{
+			std::vector<string> input = { "FBFBBFFRLR", "BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL" };
+			Assert::AreEqual(820ll , day5::run(input, false));
+			std::vector<string> input2 = { "FFFBFFFRRR", "FFFBFFFRLR", };
+			Assert::AreEqual(70ll, day5::run(input2, true));
 		}
 	};
 }
