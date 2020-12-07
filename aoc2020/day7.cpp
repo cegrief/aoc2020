@@ -66,8 +66,11 @@ std::map<string, vector<string>> parse_inputA(vector<string> input) {
 void get_color_containers(string color, std::map<string, vector<string>> bags, std::set<string> &colors_sofar) {
 
 	for (auto container : bags[color]) {
-		colors_sofar.insert(container);
-		get_color_containers(container, bags, colors_sofar);
+		// only visit this node if we haven't already
+		if (colors_sofar.find(container) == colors_sofar.end()) {
+			colors_sofar.insert(container);
+			get_color_containers(container, bags, colors_sofar);
+		}
 	}
 }
 
