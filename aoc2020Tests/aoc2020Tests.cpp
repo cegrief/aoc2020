@@ -10,6 +10,12 @@
 #include "../aoc2020/day4.cpp"
 #include "../aoc2020/day5.h"
 #include "../aoc2020/day5.cpp"
+#include "../aoc2020/day6.cpp"
+#include "../aoc2020/day6.h"
+#include "../aoc2020/day7.cpp"
+#include "../aoc2020/day7.h"
+#include "../aoc2020//utils.h"
+#include "../aoc2020//utils.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -65,6 +71,22 @@ namespace aoc2020Tests
 			Assert::AreEqual(820ll , day5::run(input, false));
 			std::vector<string> input2 = { "FFFBFFFRRR", "FFFBFFFRLR", };
 			Assert::AreEqual(70ll, day5::run(input2, true));
+		}
+
+		TEST_METHOD(Day6Test)
+		{
+			std::vector<string> input = { "abc", "", "a", "b", "c" , "", "ab", "ac", "", "a", "a","a","a", " ", "b" };
+			Assert::AreEqual(11ll, day6::run(input, false));
+
+			std::vector<string> input2 = { "fzmwqgcjylr" ,"goqewcrzfjm" ,"caqgpmrwz" };
+			Assert::AreEqual(7ll, day6::run(input2, true));
+		}
+
+		TEST_METHOD(Day7Test)
+		{
+			std::vector<string> input = { "light red bags contain 1 bright white bag, 2 muted yellow bags.", "dark orange bags contain 3 bright white bags, 4 muted yellow bags.","bright white bags contain 1 shiny gold bag.", "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.", "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.", "dark olive bags contain 3 faded blue bags, 4 dotted black bags.", "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.","faded blue bags contain no other bags.","dotted black bags contain no other bags." };
+			Assert::AreEqual(4ll, day7::run(input, false));
+			Assert::AreEqual(32ll, day7::run(input, true));
 		}
 	};
 }
