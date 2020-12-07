@@ -28,8 +28,6 @@ struct Edge {
 	}
 };
 
-
-
 bool is_number(const std::string& s)
 {
 	std::string::const_iterator it = s.begin();
@@ -37,35 +35,75 @@ bool is_number(const std::string& s)
 	return !s.empty() && it == s.end();
 }
 
-bool can_contain_gold(string bag, std::map<string, vector<Edge>> bags, std::map<string, bool> &memo) {
 
-	if (memo.find(bag) != memo.end() && memo[bag]) {
-		return true;
-	}
+std::map<string, vector<string>> parse_inputA(vector<string> input) {
+	std::map<string, vector<string>> out{};
 
-	for (auto edge : bags[bag]) {
-		if (edge.dest == "shinygold") {
-			memo[bag] = true;
-			return true;
+	for (auto line : input) {
+		vector<string> items = utils::splitString(line, ' ');
+
+		string srcColor = items[0] + items[1];
+		int i = 0;
+		while (i < items.size()) {
+			if (is_number(items[i]) && i + 1 < items.size() && i + 2 < items.size()) {
+				string destColor = items[i + 1] + items[i + 2];
+
+				if (out.find(destColor) == out.end()) {
+					out[destColor] = vector<string>{};
+				}
+				out[destColor].push_back(srcColor);
+				i++;
+			}
+			else {
+				i++;
+			}
 		}
-		if (memo.find(edge.dest) != memo.end() && memo[edge.dest]) {
-			memo[bag] = true;
-			return true;
-		}
 	}
-
-	for (auto edge : bags[bag]){
-		if (can_contain_gold(edge.dest, bags, memo)) {
-			memo[bag] = true;
-			return true;
-		}
-	}
-
-	memo[bag] = false;
-	return false;
+	return out;
 }
 
-std::map<string, vector<Edge>> parse_input(vector<string> input) {
+
+void get_color_containers(string color, std::map<string, vector<string>> bags, std::set<string> &colors_sofar) {
+
+	for (auto container : bags[color]) {
+		colors_sofar.insert(container);
+		get_color_containers(container, bags, colors_sofar);
+	}
+}
+
+long long day7::partA(vector<string> input) {
+
+	auto bags_contained_in = parse_inputA(input);
+
+	// search down from gold to all of the things that contain it
+	std::set<string> contains_gold{};
+	get_color_containers("shinygold", bags_contained_in, contains_gold);
+	return contains_gold.size();
+
+}
+
+int containsBagCount(string bag, std::map<string, vector<Edge>> bags, std::map<string, int>& memo) {
+
+	if (memo.find(bag) != memo.end()) {
+		return memo[bag];
+	}
+
+	int count = 1;
+	for (auto edge : bags[bag]) {
+		if (memo.find(edge.dest) != memo.end()) {
+			count += edge.count * memo[edge.dest];
+		}
+		else {
+			int subCount = containsBagCount(edge.dest, bags, memo);
+			memo[edge.dest] = subCount;
+			count += edge.count * subCount;
+		}
+	}
+
+	return count;
+}
+
+std::map<string, vector<Edge>> parse_inputB(vector<string> input) {
 	std::map<string, vector<Edge>> bags{};
 
 	for (auto line : input) {
@@ -94,50 +132,11 @@ std::map<string, vector<Edge>> parse_input(vector<string> input) {
 
 }
 
-long long day7::partA(vector<string> input) {
-	
-	//construct tree about input
-	std::map<string, bool> memo{};
-
-	auto bags = parse_input(input);
-	// foreach color check if it can contain gold
-	int count = 0;
-	for (auto kvp : bags) {
-		if (can_contain_gold(kvp.first, bags, memo)) {
-			count++;
-		}
-	}
-
-	return count;
-
-}
-
-int containsBagCount(string bag, std::map<string, vector<Edge>> bags, std::map<string, int>& memo) {
-
-	if (memo.find(bag) != memo.end()) {
-		return memo[bag];
-	}
-
-	int count = 1;
-	for (auto edge : bags[bag]) {
-		if (memo.find(edge.dest) != memo.end()) {
-			count += edge.count * memo[edge.dest];
-		}
-		else {
-			int subCount = containsBagCount(edge.dest, bags, memo);
-			memo[edge.dest] = subCount;
-			count += edge.count * subCount;
-		}
-	}
-
-	return count;
-}
-
 long long day7::partB(vector<string> input) {
 	//construct tree about input
 	std::map<string, int> memo{};
 
-	auto bags = parse_input(input);
+	auto bags = parse_inputB(input);
 
 	//starting with shinygold, count the number of bags needed
 	return containsBagCount("shinygold", bags, memo) - 1;
