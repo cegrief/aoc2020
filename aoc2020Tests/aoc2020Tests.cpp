@@ -188,10 +188,11 @@ namespace aoc2020Tests
 		TEST_METHOD(Day13Test)
 		{
 
-			std::vector<string> input = { "x", "7, 13,x,x,59,x,31,19" };
+			std::vector<string> input = { "939", "7,13,x,x,59,x,31,19" };
+			Assert::AreEqual(295ll, day13::partA(input));
 			Assert::AreEqual(1068781ll, day13::partB(input));
 
-			std::vector<string> input2 = { "x", "67,7,59,61" };
+			std::vector<string> input2 = { "939", "67,7,59,61" };
 			Assert::AreEqual(754018ll, day13::partB(input2));
 
 		}
