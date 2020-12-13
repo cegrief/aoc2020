@@ -51,21 +51,23 @@ long long day13::partA(vector<string> input) {
 
 }
 
+bool satisfies_conditions(int val, vector<int> nums, vector<int> rems) {
+	for (int i = 0; i < nums.size(); i++) {
+		if (val % nums[i] != rems[i]) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 long long find_min_time_bruteforce(vector<int> nums, vector<int> rems) {
 	int res = 1;
 
 	while (true) {
-		int j;
-		for (j = 0; j < nums.size(); j++) {
-			if (res % nums[j] != rems[j]) {
-				break;
-			}
-		}
-
-		if (j == nums.size()) {
+		if (satisfies_conditions(res, nums, rems)) {
 			return res;
 		}
-
 		res++;
 	}
 }
