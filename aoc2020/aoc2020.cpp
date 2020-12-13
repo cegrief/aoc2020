@@ -15,7 +15,12 @@
 #include "day5.h";
 #include "day6.h";
 #include "day7.h";
-
+#include "day8.h";
+#include "day9.h";
+#include "day10.h";
+#include "day11.h";
+#include "day12.h";
+#include "day13.h";
 
 using std::string;
 using std::vector;
@@ -47,6 +52,12 @@ long long executeFunction(int day, bool partB, vector<string> input)
     fnMap[5] = day5::run;
     fnMap[6] = day6::run;
     fnMap[7] = day7::run;
+    fnMap[8] = day8::run;
+    fnMap[9] = day9::run;
+    fnMap[10] = day10::run;
+    fnMap[11] = day11::run;
+    fnMap[12] = day12::run;
+    fnMap[13] = day13::run;
 
     auto start = std::chrono::high_resolution_clock::now();
     long long result = fnMap[day](input, partB);

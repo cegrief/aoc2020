@@ -14,8 +14,20 @@
 #include "../aoc2020/day6.h"
 #include "../aoc2020/day7.cpp"
 #include "../aoc2020/day7.h"
+#include "../aoc2020/day8.cpp"
+#include "../aoc2020/day8.h"
 #include "../aoc2020//utils.h"
 #include "../aoc2020//utils.cpp"
+#include "../aoc2020/day9.cpp"
+#include "../aoc2020/day9.h"
+#include "../aoc2020/day10.cpp"
+#include "../aoc2020/day10.h"
+#include "../aoc2020/day11.cpp"
+#include "../aoc2020/day11.h"
+#include "../aoc2020/day12.cpp"
+#include "../aoc2020/day12.h"
+#include "../aoc2020/day13.cpp"
+#include "../aoc2020/day13.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -24,7 +36,7 @@ namespace aoc2020Tests
 	TEST_CLASS(aoc2020Tests)
 	{
 	public:
-		
+
 		TEST_METHOD(Day1Test)
 		{
 			std::vector<string> input = { "1721", "979", "366", "299", "675", "1456" };
@@ -68,7 +80,7 @@ namespace aoc2020Tests
 		TEST_METHOD(Day5Test)
 		{
 			std::vector<string> input = { "FBFBBFFRLR", "BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL" };
-			Assert::AreEqual(820ll , day5::run(input, false));
+			Assert::AreEqual(820ll, day5::run(input, false));
 			std::vector<string> input2 = { "FFFBFFFRRR", "FFFBFFFRLR", };
 			Assert::AreEqual(70ll, day5::run(input2, true));
 		}
@@ -87,6 +99,101 @@ namespace aoc2020Tests
 			std::vector<string> input = { "light red bags contain 1 bright white bag, 2 muted yellow bags.", "dark orange bags contain 3 bright white bags, 4 muted yellow bags.","bright white bags contain 1 shiny gold bag.", "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.", "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.", "dark olive bags contain 3 faded blue bags, 4 dotted black bags.", "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.","faded blue bags contain no other bags.","dotted black bags contain no other bags." };
 			Assert::AreEqual(4ll, day7::run(input, false));
 			Assert::AreEqual(32ll, day7::run(input, true));
+		}
+
+
+		TEST_METHOD(Day8Test)
+		{
+			std::vector<string> input = { "nop +0",
+"acc +1",
+"jmp +4",
+"acc +3",
+"jmp -3",
+"acc -99",
+"acc +1",
+"jmp -4",
+"acc +6" };
+			Assert::AreEqual(5ll, day8::run(input, false));
+			Assert::AreEqual(8ll, day8::run(input, true));
+		}
+
+
+		TEST_METHOD(Day9Test)
+		{
+			std::vector<long long> input = { 35, 20, 15, 25, 47, 40, 62, 55, 65, 95,102,117,150,182,127,219,299,277,309,576 };
+			Assert::AreEqual(127ll, day9::partA(input, 5));
+			Assert::AreEqual(62ll, day9::partB(input, 5));
+		}
+
+		TEST_METHOD(Day10Test)
+		{
+			std::vector<long long> input = { 28,
+33,
+18,
+42,
+31,
+14,
+46,
+20,
+48,
+47,
+24,
+23,
+49,
+45,
+19,
+38,
+39,
+11,
+1 ,
+32,
+25,
+35,
+8 ,
+17,
+7 ,
+9 ,
+4 ,
+2 ,
+34,
+10,
+3 };
+			Assert::AreEqual(220ll, day10::partA(input, 5));
+			Assert::AreEqual(19208ll, day10::partB(input, 5));
+		}
+
+		TEST_METHOD(Day11Test)
+		{
+			std::vector<string> input = { "L.LL.LL.LL",
+"LLLLLLL.LL",
+"L.L.L..L..",
+"LLLL.LL.LL",
+"L.LL.LL.LL",
+"L.LLLLL.LL",
+"..L.L.....",
+"LLLLLLLLLL",
+"L.LLLLLL.L",
+"L.LLLLL.LL" };
+			Assert::AreEqual(37ll, day11::partA(input));
+			Assert::AreEqual(26ll, day11::partB(input));
+		}
+
+		TEST_METHOD(Day12Test)
+		{
+			std::vector<string> input = { "F10", "N3", "F7", "L270", "F11" };
+			Assert::AreEqual(25ll, day12::partA(input));
+			Assert::AreEqual(286ll, day12::partB(input));
+		}
+
+		TEST_METHOD(Day13Test)
+		{
+
+			std::vector<string> input = { "x", "7, 13,x,x,59,x,31,19" };
+			Assert::AreEqual(1068781ll, day13::partB(input));
+
+			std::vector<string> input2 = { "x", "67,7,59,61" };
+			Assert::AreEqual(754018ll, day13::partB(input2));
+
 		}
 	};
 }
